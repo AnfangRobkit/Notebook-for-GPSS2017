@@ -1,0 +1,98 @@
+<h3 id="what-is-machine-learning">What is Machine Learning?</h3>
+<p><br /><span class="math display">$$ \text{data} + \text{model} \rArr \text{prediction}$$</span><br /></p>
+<ul>
+<li><p><span class="math inline">data</span> : observations, could be actively or passively acquired (meta-data).</p></li>
+<li><p><span class="math inline">model</span> : assumptions, based on previous experience (other data! transfer learning etc), or beliefs about the regularities of the universe. Inductive bias.</p></li>
+<li><p><span class="math inline">prediction</span> : an action to be taken or a categorization or a quality score.</p></li>
+</ul>
+<h3 id="two-important-gaussian-properties">Two important Gaussian Properties</h3>
+<ul>
+<li><p>Sum of Gaussianv</p>
+<p>Sum of Gaussian variables is also Gaussian.</p></li>
+</ul>
+<p><br /><span class="math display"><em>y</em><sub><em>i</em></sub> ∼ 𝒩(<em>μ</em><sub><em>i</em></sub>, <em>σ</em><sub><em>i</em></sub><sup>2</sup>)</span><br /></p>
+<p>And the sum is distributed as</p>
+<p><br /><span class="math display">∑<em>y</em><sub><em>i</em></sub> ∼ 𝒩(∑<em>μ</em><sub><em>i</em></sub>, ∑<em>σ</em><sub><em>i</em></sub><sup>2</sup>)</span><br /></p>
+<p>Aside: As sum increase, sum of non-Gaussian, finite variance variables is also Gaussian because of <strong>central limit theorem</strong>. - Scaling a Gaussian Scaling a Gaussian leads to a Gaussian.</p>
+<p><br /><span class="math display"><em>ω</em> * <em>y</em> ∼ 𝒩(<em>ω</em><em>μ</em>, <em>ω</em><sup>2</sup><em>σ</em><sup>2</sup>)</span><br /></p>
+<p>The <strong>central limit theorem</strong> (CLT) establishes that, in some situations, when independent random variables are added, their properly normalized sum tends toward a normal distribution (informally a “bell curve”) even if the original variables themselves are not normally distributed.</p>
+<h3 id="prior-distribution">Prior Distribution</h3>
+<ul>
+<li><p>Bayesian inference requires a prior on the parameters.</p></li>
+<li><p>The prior represents your belief <em>before</em> you see the data of the likely value of the parameters.</p></li>
+<li><p>For linear regression, consider a Gaussian prior on the intercept:</p>
+<p><br /><span class="math display"><em>c</em> ∼ 𝒩(0, <em>α</em><sub>1</sub>)</span><br /></p></li>
+</ul>
+<h3 id="posterior-distribution">Posterior Distribution</h3>
+<ul>
+<li><p>Posterior distribution is found by combining the prior with the likelihood.</p></li>
+<li><p>Posterior distribution is your belief <em>after</em> you see the data of the likely value of the parameters.</p></li>
+<li><p>The posterior is found through <strong>Bayes’ Rule</strong> <br /><span class="math display">$$p(c|y) = \frac{p(y|c)p(c)}{p(y)}$$</span><br /> The <span class="math inline"><em>p</em>(<em>y</em>|<em>c</em>)</span> likelihood is not a density over <span class="math inline"><em>c</em></span>, it’s a function of <span class="math inline"><em>c</em></span>. Here, <span class="math inline"><em>c</em></span> is a parameter of this density. The normalization step, e.g. find the suitable way to compute the <span class="math inline"><em>p</em>(<em>y</em>)</span> is the most difficult setp.</p></li>
+</ul>
+<figure>
+<img src="https://raw.githubusercontent.com/AnfangRobkit/Notebook-for-GPSS2017/master/pics/01-01.PNG" alt="Bayes Update" /><figcaption>Bayes Update</figcaption>
+</figure>
+<p>The red line describe the probablity for <span class="math inline"><em>c</em></span> with: <br /><span class="math display"><em>p</em>(<em>c</em>) = 𝒩(<em>c</em>|0, <em>α</em><sub>1</sub>)</span><br /> the blue line stands for the observation, with: <br /><span class="math display"><em>p</em>(<em>y</em>|<em>m</em>, <em>c</em>, <em>x</em>, <em>σ</em><sup>2</sup>) = 𝒩(<em>y</em>|<em>m</em><em>x</em> + <em>c</em>, <em>σ</em><sup>2</sup>)</span><br /> Note that, this is a likelihood function over <span class="math inline"><em>c</em></span> not a distribution. based on the bayes’rule, the posterior could be written as: <br /><span class="math display">$$P(c|y,m,x,\sigma^{2}) = \mathcal{N}(c|\frac{y-mx}{1+\sigma^{2}}\alpha,(\sigma^{-2}+\alpha_{1}^{-1})^{-1})$$</span><br /> Math Trick: <br /><span class="math display">$$p(c) = \frac{1}{\sqrt{2\pi\alpha_1}} \exp\left(-\frac{1}{2\alpha_1}c^2\right)$$</span><br /> <br /><span class="math display">$$p(\mathbf{y}|\mathbf{x}, c, m, \sigma^2) = \frac{1}{\left(2\pi\sigma^2\right)^{\frac{n}{2}}} \exp\left(-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i - mx_i - c)^2\right)$$</span><br /> <br /><span class="math display">$$p(c| \mathbf{y}, \mathbf{x}, m, \sigma^2) = \frac{p(\mathbf{y}|\mathbf{x}, c, m, \sigma^2)p(c)}{p(\mathbf{y}|\mathbf{x}, m, \sigma^2)}$$</span><br /></p>
+<p><br /><span class="math display">$$p(c| \mathbf{y}, \mathbf{x}, m, \sigma^2) =  \frac{p(\mathbf{y}|\mathbf{x}, c, m, \sigma^2)p(c)}{\int p(\mathbf{y}|\mathbf{x}, c, m, \sigma^2)p(c) \text{d} c}$$</span><br /> <br /><span class="math display"><em>p</em>(<em>c</em>|<strong>y</strong>, <strong>x</strong>, <em>m</em>, <em>σ</em><sup>2</sup>) ∝ <em>p</em>(<strong>y</strong>|<strong>x</strong>, <em>c</em>, <em>m</em>, <em>σ</em><sup>2</sup>)<em>p</em>(<em>c</em>)</span><br /></p>
+<p><br /><span class="math display">$$\begin{aligned}
+    \log p(c | \mathbf{y}, \mathbf{x}, m, \sigma^2) =&amp;-\frac{1}{2\sigma^2} \sum_{i=1}^n(y_i-c - mx_i)^2-\frac{1}{2\alpha_1} c^2 + \text{const}\\
+     = &amp;-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-mx_i)^2 -\left(\frac{n}{2\sigma^2} + \frac{1}{2\alpha_1}\right)c^2\\
+    &amp; + c\frac{\sum_{i=1}^n(y_i-mx_i)}{\sigma^2},
+  \end{aligned}$$</span><br /></p>
+<p>complete the square of the quadratic form to obtain <br /><span class="math display">$$\log p(c | \mathbf{y}, \mathbf{x}, m, \sigma^2) = -\frac{1}{2\tau^2}(c - \mu)^2 +\text{const}$$</span><br /> where <br /><span class="math display"><em>τ</em><sup>2</sup> = (<em>n</em><em>σ</em><sup> − 2</sup>+<em>α</em><sub>1</sub><sup> − 1</sup>)<sup> − 1</sup></span><br /> and</p>
+<p><span class="math inline">$\mu = \frac{\tau^2}{\sigma^2} \sum_{i=1}^n(y_i-mx_i)$</span>.</p>
+<p>Piror comes from the model, where we think about it. And likelihood is coming from the data.</p>
+<h3 id="stages-to-derivation-of-the-posterior">Stages to Derivation of the Posterior</h3>
+<ul>
+<li><p>Multiply likelihood by prior</p>
+<ul>
+<li>they are “exponentiated quadratics”, the answer is always also an exponentiated quadratic because <br /><span class="math display">exp (<em>a</em><sup>2</sup>)exp (<em>b</em><sup>2</sup>) = exp (<em>a</em><sup>2</sup> + <em>b</em><sup>2</sup>)</span><br /></li>
+</ul></li>
+<li><p>Complete the square to get the resulting density in the form of a Gaussian.</p></li>
+<li><p>Recognise the mean and (co)variance of the Gaussian. This is the estimate of the posterior.</p></li>
+</ul>
+<h3 id="multivariate-regression-likelihood">Multivariate Regression Likelihood</h3>
+<ul>
+<li>Noise corrupted data point <br /><span class="math display"><em>y</em><sub><em>i</em></sub> = 𝓌<sup><em>T</em></sup><em>X</em><sub><em>i</em>, :</sub> + <em>ϵ</em><sub><em>i</em></sub></span><br /></li>
+<li>Multivariate regression likelihood: <br /><span class="math display">$$p(y|X,w)=\frac{1}{(2\pi\sigma^{2})}exp(-\frac{1}{2\sigma^{2}}\sum(y_{i}-w^{T}x_{i,:})^2)$$</span><br /></li>
+<li>Multivariate Gaussian piroi: <br /><span class="math display">$$p(w)=\frac{1}{(2\pi\sigma^{2})^{p/2}}exp(-\frac{1}{2\sigma^{2}}w^{T}w)$$</span><br /></li>
+</ul>
+<p>The independent multivariate Gaussian could be seen as the independent Gaussian and multiple them and rotate the results.</p>
+<h4 id="independent-gaussians">Independent Gaussians:</h4>
+<p><br /><span class="math display">$$p(w,h)=\frac{1}{\sqrt{2\pi\alpha_1}\sqrt{2\pi\alpha_2}} \exp(-\frac{1}{2}(\frac{(w-\mu_1)^2}{\sigma_1^2}+\frac{(h-\mu_2)^2}{\sigma_2^2}))$$</span><br /></p>
+<p>and we can write it with linear algebra form: <br /><span class="math display">$$p(w,h)=\frac{1}{\sqrt{2\pi\alpha_1}\sqrt{2\pi\alpha_2}} \exp(-\frac{1}{2}(\begin{bmatrix}
+w\\ 
+h
+\end{bmatrix}-\begin{bmatrix}
+u_1\\ 
+u_2
+\end{bmatrix})^T(\begin{bmatrix}
+\sigma_1 &amp; 0\\ 
+0 &amp; \sigma_2
+\end{bmatrix}\begin{bmatrix}
+w\\ 
+h
+\end{bmatrix}-\begin{bmatrix}
+u_1\\ 
+u_2
+\end{bmatrix}))$$</span><br /></p>
+<p>and then, rename it: <br /><span class="math display">$$p(y)=\frac{1}{|2 \pi*D|^\frac{1}{2}} \exp(-\frac{1}{2}(y-\mu)^TD^{-1}(Y-\mu))$$</span><br /> <span class="math inline">|<em>D</em>|</span> means the determinant of the matrix.</p>
+<h4 id="correlated-gaussian">Correlated Gaussian</h4>
+<p>Form correlated from original by rotating the data space using matrx R. <br /><span class="math display">$$p(y)=\frac{1}{|2 \pi*D|^\frac{1}{2}} \exp(-\frac{1}{2}(R^Ty-R^T\mu)^TD^{-1}(R^TY-R^T\mu))$$</span><br /> <br /><span class="math display">$$p(y)=\frac{1}{|2 \pi*D|^\frac{1}{2}} \exp(-\frac{1}{2}(y-\mu)^TRD^{-1}R^T(Y-\mu))$$</span><br /> this gives a covariance matric: <br /><span class="math display"><em>C</em><sup> − 1</sup> = <em>R</em><em>D</em><sup> − 1</sup><em>R</em><sup><em>T</em></sup></span><br /> which in some view is the result of the principal compoment.</p>
+<h3 id="multivariate-consequence">Multivariate Consequence</h3>
+<p>if <br /><span class="math display">$$x \sim \mathcal{N}(\mu,\varSigma)$$</span><br /> and <br /><span class="math display"><em>y</em> = <em>W</em><em>x</em></span><br /> then <br /><span class="math display">$$y\sim \mathcal{N}(W\mu,W\varSigma W^T)$$</span><br /></p>
+<p>we can say the first equaption is the prior of <span class="math inline"><em>x</em></span>, the second is the likelihood, the last is the marginal of <span class="math inline"><em>y</em></span>. If we set <span class="math inline">$\mu = 0, \varSigma = I$</span>, so it is just the inverse of PCA.</p>
+<h2 id="prediction-with-correlated-gaussians">Prediction with Correlated Gaussians</h2>
+<ul>
+<li>Prediction of <span class="math inline"><strong>f</strong><sub>*</sub></span> from <span class="math inline"><strong>f</strong></span> requires multivariate <em>conditional density</em>.</li>
+<li>Multivariate conditional density is <em>also</em> Gaussian. <br /><span class="math display"><em>p</em>(<strong>f</strong><sub>*</sub>|<strong>f</strong>) = 𝒩(<strong>f</strong><sub>*</sub>|<strong>K</strong><sub>*,<strong>f</strong></sub><strong>K</strong><sub><strong>f</strong>, <strong>f</strong></sub><sup> − 1</sup><strong>f</strong>,<strong>K</strong><sub>*,*</sub>−<strong>K</strong><sub>*,<strong>f</strong></sub><strong>K</strong><sub><strong>f</strong>, <strong>f</strong></sub><sup> − 1</sup><strong>K</strong><sub><strong>f</strong>, *</sub>)</span><br /></li>
+<li>Here covariance of joint density is given by <br /><span class="math display">$$
+\mathbf{K} = \begin{bmatrix} \mathbf{K}_{\mathbf{f}, \mathbf{f}} &amp; \mathbf{K}_{*, \mathbf{f}}\\ \mathbf{K}_{\mathbf{f}, *} &amp; \mathbf{K}_{*, *}\end{bmatrix}
+$$</span><br /></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/AnfangRobkit/Notebook-for-GPSS2017/master/pics/01-02.PNG" alt="Prediction" /><br />
+Take the picture as the example:</p>
+<p>since that example is in 1D, all the values are scalar. <span class="math inline"><em>f</em> = <em>f</em>1 =  − 0.4</span>, <span class="math inline"><em>K</em><sub><em>f</em>, <em>f</em></sub> = 1, <em>K</em><sub>*,<em>f</em></sub> = 0.98, <em>K</em><sub>*,*</sub> = 1</span>, so <br /><span class="math display"><em>p</em>(<em>p</em><sub>2</sub>|<em>p</em><sub>1</sub>) = 𝒩(<em>p</em><sub>2</sub>|0.98 * 1 * ( − 0.4), 1 − 0.98 * 1 * 0.98)</span><br /> <br /><span class="math display"><em>p</em>(<em>p</em><sub>2</sub>|<em>p</em><sub>1</sub>) = 𝒩(<em>p</em><sub>2</sub>| − 0.392, 0.0396)</span><br /> the variance is 0.0396, and the standard variance is 0.2.</p>
+<figure>
+<img src="https://raw.githubusercontent.com/AnfangRobkit/Notebook-for-GPSS2017/master/pics/01-03.PNG" alt="Prediction" /><figcaption>Prediction</figcaption>
+</figure>
