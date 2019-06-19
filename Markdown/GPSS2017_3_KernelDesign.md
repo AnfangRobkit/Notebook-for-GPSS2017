@@ -43,7 +43,7 @@ Furthermore, it is often interesting to try some input remapping such as $x \rig
 
 ### Example: $CO_2$
 
-![1560890999880](C:\Users\13269\Desktop\python_Markdown\GPSS\Notebook-for-GPSS2017\pics\02-06.PNG)
+![1560890999880](<https://raw.githubusercontent.com/AnfangRobkit/Notebook-for-GPSS2017/master/pics/02-06.PNG>)
 
 - First, we consider a squared-exponential kernel:
   $$
@@ -51,7 +51,7 @@ Furthermore, it is often interesting to try some input remapping such as $x \rig
   $$
   
 
-![1560891091853](C:\Users\13269\Desktop\python_Markdown\GPSS\Notebook-for-GPSS2017\pics\02-07.PNG)
+![1560891091853](<https://raw.githubusercontent.com/AnfangRobkit/Notebook-for-GPSS2017/master/pics/02-07.PNG>)
 
 First, we would like to say that we observe the high frequency in the data, so we would like to choose a very small length scale value, the result is shown as the left picture. The reason is that, you choose the small scale value, when you are in 2020, the model will get no information from the data set and not influenced by the past values.
 
@@ -61,7 +61,7 @@ Second choice is to be focus on the trend, with low frequency which would lead t
   $$
   k(x, y)=k_{r b f 1}(x, y)+k_{r b f 2}(x, y)
   $$
-  ![1560891556775](C:\Users\13269\Desktop\python_Markdown\GPSS\Notebook-for-GPSS2017\pics\02-08.PNG)
+  ![1560891556775](<https://raw.githubusercontent.com/AnfangRobkit/Notebook-for-GPSS2017/master/pics/02-08.PNG>)
 
 One thing to notice that, even in the second choice (combination choice), it seems that we would have more parameters, but indeed the optimization process will get easier than the first choice. Because for the first two model, the likelihood will get very very small, since both assumptions make sense for data we have.
 
@@ -71,7 +71,7 @@ One thing to notice that, even in the second choice (combination choice), it see
   $$
   
 
-![1560891925621](C:\Users\13269\Desktop\python_Markdown\GPSS\Notebook-for-GPSS2017\pics\02-09.PNG)
+![1560891925621](<https://raw.githubusercontent.com/AnfangRobkit/Notebook-for-GPSS2017/master/pics/02-09.PNG>)
 
 ###  Sum of  kernels  over  tensor  space
 
@@ -81,7 +81,7 @@ k(\mathbf{x}, \mathbf{y})=k_{1}\left(x_{1}, y_{1}\right)+k_{2}\left(x_{2}, y_{2}
 $$
 is a valid covariance structure.
 
-![1560893886801](C:\Users\13269\Desktop\python_Markdown\GPSS\Notebook-for-GPSS2017\pics\02-10.PNG)
+![1560893886801](<https://raw.githubusercontent.com/AnfangRobkit/Notebook-for-GPSS2017/master/pics/02-10.PNG>)
 
 Tensor Additive kernels are very useful for:
 
@@ -100,13 +100,13 @@ $$
 
 3. The prediction variance has interesting features.
 
-   ![1560894134746](C:\Users\13269\Desktop\python_Markdown\GPSS\Notebook-for-GPSS2017\pics\02-11.PNG)
+   ![1560894134746](<https://raw.githubusercontent.com/AnfangRobkit/Notebook-for-GPSS2017/master/pics/02-11.PNG>)
 
 The right one comes from a additive kernel, as we can see even in the area which is away from the observation points, the variance is not too high. The reason for that our prior, e.g. kernel is additive, we already three observations which would form a rectangle, and our prediction would be the fourth vertex, thus the variance would be small.  **All the prior would retrieve it in the posterior**.
 
 This property can be used to construct a design of experiment that covers the space  especially for the high-D input space,  with only $cst × d$ points.
 
-![1560894678169](C:\Users\13269\Desktop\python_Markdown\GPSS\Notebook-for-GPSS2017\pics\02-12.PNG)
+![1560894678169](<https://raw.githubusercontent.com/AnfangRobkit/Notebook-for-GPSS2017/master/pics/02-12.PNG>)
 
 ### Product  over  the  same  space
 
@@ -116,7 +116,7 @@ k(x, y)=k_{1}(x, y) \times k_{2}(x, y)
 $$
 is valid covariance structure.
 
-![1560894868103](C:\Users\13269\Desktop\python_Markdown\GPSS\Notebook-for-GPSS2017\pics\02-13.PNG)
+![1560894868103](<https://raw.githubusercontent.com/AnfangRobkit/Notebook-for-GPSS2017/master/pics/02-13.PNG>)
 
 ### Product  over  the tensor  space
 
@@ -124,7 +124,7 @@ $$
 k(\mathbf{x}, \mathbf{y})=k_{1}\left(x_{1}, y_{1}\right) \times k_{2}\left(x_{2}, y_{2}\right)
 $$
 
-![1560895062083](C:\Users\13269\Desktop\python_Markdown\GPSS\Notebook-for-GPSS2017\pics\02-14.PNG)
+![1560895062083](<https://raw.githubusercontent.com/AnfangRobkit/Notebook-for-GPSS2017/master/pics/02-14.PNG>)
 
 ### Composition with  a  function 
 
@@ -142,7 +142,7 @@ Given a few observations can we extract the periodic part of a signal ?
 
 As previously we will build a decomposition of the process in two independent GPs :
 $$
-Z=Z_{p}+Z_{a}\\
+Z=Z_{p}+Z_{a}\\
 $$
 ${\text { where } Z_{p} \text { is a GP in the span of the Fourier basis }} $
 $$
@@ -164,4 +164,4 @@ and we can associate a prediction variance to the sub-models:
 $$
 \begin{aligned} v_{p}(t) &=k_{p}(x, x)-k_{p}(x, X)^{t} k(X, X)^{-1} k_{p}(t) \\ v_{a}(t) &=k_{a}(x, x)-k_{a}(x, X)^{t} k(X, X)^{-1} k_{a}(t) \end{aligned}
 $$
-![1560940503339](C:\Users\13269\Desktop\python_Markdown\GPSS\Notebook-for-GPSS2017\pics\02-15.PNG)
+![1560940503339](<https://raw.githubusercontent.com/AnfangRobkit/Notebook-for-GPSS2017/master/pics/02-15.PNG>)
