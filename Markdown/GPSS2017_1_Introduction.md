@@ -42,8 +42,11 @@ The **central limit theorem** (CLT) establishes that, in some situations, when i
 
 -   For linear regression, consider a Gaussian prior on the intercept:
 
+$$
+c\sim \mathcal{N}(0, \alpha_1)
+$$
 
-    $$ c\sim \mathcal{N}(0, \alpha_1)$$
+
 
 ### Posterior Distribution
 
@@ -165,7 +168,7 @@ we can say the first equaption is the prior of $x$, the second is the likelihood
     $$
     \mathbf{K} = \begin{bmatrix} \mathbf{K}_{\mathbf{f}, \mathbf{f}} & \mathbf{K}_{*, \mathbf{f}}\\ \mathbf{K}_{\mathbf{f}, *} & \mathbf{K}_{*, *}\end{bmatrix}
     $$
-  
+
 ![Prediction](https://raw.githubusercontent.com/AnfangRobkit/Notebook-for-GPSS2017/master/pics/01-02.PNG)  
 Take the picture as the example:
 
