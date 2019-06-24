@@ -13,7 +13,7 @@ $$ \text{data} + \text{model} \rArr \text{prediction}$$
     quality score.
 
 ### Two important Gaussian Properties
-- Sum of Gaussianv
+- Sum of Gaussian
 
   Sum of Gaussian variables is also Gaussian.
 
